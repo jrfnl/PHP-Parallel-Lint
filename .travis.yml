@@ -1,3 +1,5 @@
+dist: trusty
+
 language: php
 
 php:
@@ -9,8 +11,6 @@ php:
   - "7.2"
   - "7.3"
   - "7.4snapshot"
-
-sudo: false
 
 cache:
   directories:
@@ -30,7 +30,7 @@ script:
   - ./vendor/bin/tester -p php tests
   - ./parallel-lint --exclude vendor --exclude tests/examples --no-colors .
   - ./parallel-lint --exclude vendor --exclude tests/examples .
-  - ./vendor/bin/phpcs --standard=phpcs-ruleset.xml -s src
+  - if [[ $TRAVIS_PHP_VERSION == "7.3" ]]; then ./vendor/bin/phpcs;fi
 
 before_deploy:
   - curl -LSs https://box-project.github.io/box2/installer.php | php
