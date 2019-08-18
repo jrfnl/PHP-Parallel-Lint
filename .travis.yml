@@ -8,6 +8,7 @@ php:
   - "7.1"
   - "7.2"
   - "7.3"
+  - "7.4snapshot"
 
 sudo: false
 
@@ -15,6 +16,12 @@ cache:
   directories:
     - vendor
     - $HOME/.composer/cache
+
+jobs:
+  fast_finish: true
+  allow_failures:
+    # Allow failures for unstable builds.
+    - php: "7.4snapshot"
 
 install:
   - composer install --no-interaction --prefer-source
