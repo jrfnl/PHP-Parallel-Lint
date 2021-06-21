@@ -3,6 +3,7 @@ namespace JakubOnderka\PhpParallelLint;
 
 class Exception extends \Exception implements \JsonSerializable
 {
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return array(
