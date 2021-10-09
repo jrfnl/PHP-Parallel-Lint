@@ -105,6 +105,7 @@ jobs:
           php-version: ${{ matrix.php }}
           ini-values: error_reporting=-1, display_errors=On, zend.assertions=1
           coverage: none
+          tools: cs2pr
 
       # Remove PHPCS as it has a minimum PHP requirements of PHP 5.4 and would block install on PHP 5.3.
       - name: 'Composer: remove PHPCS'
@@ -137,7 +138,7 @@ jobs:
         run: php ./parallel-lint.phar --exclude vendor --exclude tests/examples .
 
       - name: Run linter against codebase using the phar - checkstyle report
-        run: php ./parallel-lint.phar --exclude vendor --exclude tests/examples . --checkstyle
+        run: php ./parallel-lint.phar --exclude vendor --exclude tests/examples . --checkstyle | cs2pr
 
       - name: Run linter against codebase using the phar - JSON report
         if: ${{ matrix.php >= 5.4 }}
