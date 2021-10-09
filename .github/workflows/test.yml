@@ -136,5 +136,19 @@ jobs:
         with:
           name: parallel-lint-phar
 
-      - name: Run linter against codebase using the phar
+      - name: Run linter against codebase using the phar - plain report
         run: php ./parallel-lint.phar --exclude vendor --exclude tests/examples .
+
+      - name: Run linter against codebase using the phar - checkstyle report
+        run: php ./parallel-lint.phar --exclude vendor --exclude tests/examples . --checkstyle
+
+      - name: Run linter against codebase using the phar - JSON report
+        if: ${{ matrix.php >= 5.4 }}
+        run: php ./parallel-lint.phar --exclude vendor --exclude tests/examples . --json
+
+      - name: Run linter against codebase using the phar - gitlab report
+        if: ${{ matrix.php >= 5.4 }}
+        run: php ./parallel-lint.phar --exclude vendor --exclude tests/examples . --gitlab
+
+      - name: Run linter against codebase using the phar - blame report
+        run: php ./parallel-lint.phar --exclude vendor --exclude tests/examples . --blame

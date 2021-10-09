@@ -86,8 +86,22 @@ jobs:
           ini-values: error_reporting=-1, display_errors=On, zend.assertions=1
           coverage: none
 
-      - name: Run linter against codebase
+      - name: Run linter against codebase - plain report
         run: php ./parallel-lint.phar src/
+
+      - name: Run linter against codebase - checkstyle report
+        run: php ./parallel-lint.phar src/ --checkstyle
+
+      - name: Run linter against codebase - JSON report
+        if: ${{ matrix.php >= 5.4 }}
+        run: php ./parallel-lint.phar src/ --json
+
+      - name: Run linter against codebase - gitlab report
+        if: ${{ matrix.php >= 5.4 }}
+        run: php ./parallel-lint.phar src/ --gitlab
+
+      - name: Run linter against codebase - blame report
+        run: php ./parallel-lint.phar src/ --blame
 
   publish:
     name: Add binary to release
