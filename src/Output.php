@@ -152,10 +152,10 @@ class GitLabOutput implements Output
                     ),
                 ),
             );
-            array_push($errors, $result);
+            \array_push($errors, $result);
         }
 
-        $string = json_encode($errors) . PHP_EOL;
+        $string = \json_encode($errors) . PHP_EOL;
         $this->writer->write($string);
     }
 }
@@ -235,7 +235,7 @@ class TextOutput implements Output
      */
     public function writeNewLine($count = 1)
     {
-        $this->write(str_repeat(PHP_EOL, $count));
+        $this->write(\str_repeat(PHP_EOL, $count));
     }
 
     /**
