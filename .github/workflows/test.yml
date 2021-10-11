@@ -74,7 +74,7 @@ jobs:
 
   test:
     name: Run tests on PHP ${{ matrix.php }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     continue-on-error: ${{ matrix.experimental == true }}
     needs:
       - bundle
@@ -106,7 +106,6 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: json, tokenizer
           ini-values: error_reporting=E_ALL, display_errors=On
           coverage: none
 
